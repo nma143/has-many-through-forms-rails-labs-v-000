@@ -6,7 +6,7 @@
 
 <h2>Categories:</h2>
 <% @post.categories.each do |c| %>
-  <%= c.name %>
+  <%= c.name %><br>
 <% end %>
 
 <h2>Comments:</h2>
@@ -16,19 +16,22 @@
 
 <h2>Users:</h2>
 <% @post.users.distinct.each do |user| %>
-  <%= link_to user.username, user_path(user) %>
+  <%= link_to user.username, user_path(user) %> <br>
 <% end %>
 
 <h2>Add Comment:</h2>
 
 <%= form_for(@comment) do |f| %>
-  <p>
   <%= f.hidden_field :post_id, :value => @post.id%>
-  </p>
   <p>
   <%= f.label :content %>
   <%= f.text_area  :content %>
   </p>
- <%= f.collection_select :user_id, User.all, :id, :username, include_blank: true %>
+  <%= f.collection_select :user_id, User.all, :id, :username, include_blank: true %>
+  <br><br>
+  <%= f.fields_for :user_attributes, User.new do |user_builder| %>
+    <%= user_builder.text_field :username %>
+    <% end %>
+  <br><br>
   <%= f.submit %>
 <% end %>
