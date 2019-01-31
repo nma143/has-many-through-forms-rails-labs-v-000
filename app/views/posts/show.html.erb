@@ -11,10 +11,24 @@
 
 <h2>Comments:</h2>
 <% @post.comments.each do |comment| %>
-  <%= comment.content %>
+  <%= comment.user.username %> says: <%= comment.content %> <br>
 <% end %>
 
 <h2>Users:</h2>
 <% @post.users.distinct.each do |user| %>
   <%= link_to user.username, user_path(user) %>
+<% end %>
+
+<h2>Add Comment:</h2>
+
+<%= form_for(@comment) do |f| %>
+  <p>
+  <%= f.hidden_field :post_id, :value => @post.id%>
+  </p>
+  <p>
+  <%= f.label :content %>
+  <%= f.text_area  :content %>
+  </p>
+ <%= f.collection_select :user_id, User.all, :id, :username, include_blank: true %>
+  <%= f.submit %>
 <% end %>

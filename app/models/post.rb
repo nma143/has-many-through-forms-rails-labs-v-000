@@ -5,10 +5,6 @@ class Post < ActiveRecord::Base
   has_many :users, through: :comments
 
 
-  # def user_username
-  #   self.user ? self.user.username : nil
-  # end
-
   def categories_attributes=(categories_hash)
     categories_hash.each do |i, category_attributes|
       #find or create the category regardless of whether this post has it
