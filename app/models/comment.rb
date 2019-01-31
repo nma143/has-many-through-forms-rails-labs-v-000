@@ -10,7 +10,7 @@ class Comment < ActiveRecord::Base
     # Do not create a user if it doens't have a username
     if user_hash[:username].present?
       user = User.find_or_create_by(username: user_hash[:username])
-      self.user.build(:user => user)
+      self.user_id=user.id
     end
   end
 
