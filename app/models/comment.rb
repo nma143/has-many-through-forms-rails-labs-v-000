@@ -12,7 +12,6 @@ class Comment < ActiveRecord::Base
       user = User.find_or_create_by(username: user_hash[:username])
       self.user.build(:user => user)
     end
-    end
   end
 
 end
