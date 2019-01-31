@@ -28,10 +28,10 @@
   <%= f.text_area  :content %>
   </p>
   <%= f.collection_select :user_id, User.all, :id, :username, include_blank: true %>
-
-  <%= f.fields_for :users, User.new do |user_builder| %>
+  <br><br>
+  <%= f.fields_for :user_attributes, User.new do |user_builder| %>
     <%= user_builder.text_field :username %>
     <% end %>
-
+  <br><br>
   <%= f.submit %>
 <% end %>
